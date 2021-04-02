@@ -1,0 +1,72 @@
+step 1:  check your disk is mounted or not 
+#lsblk
+
+Note: if it is mounted it will show you like --->>>    xvdf1 202:81   0  15G  0 part /aws
+
+Step 2: after that type command :
+#fdisk /dev/xvdf
+
+Note: here xvdf is your extra drive that is attched to your EC2 instance to know which is your attached drive  just type lsblk and hit enter
+
+Step 3: type m : for make partition 
+Step 4: type n : for new partion 
+step 5: type p : for make partion 
+step 6: type 1 : if it show 0 to 4  just press 1 for make partion parimary 
+step 7: type w : for write partion table on disk
+
+Step 8: run below command 
+#mkfs.ext4 /dev/xvdf1
+
+Note: here xvdf1 is now formatted disk drive name to see this drive just type lsblk command and hit enter
+
+Step 9: now make a directory or folder where you want to mount your drive.
+
+#mkdir  ExtraVolume
+
+Step 10: now mount your disk for this just type below command 
+#mount /dev/xvdf1 /ExtraVolume
+
+Step 11:now last command is 
+
+# mount -a
+
+Note : All above command is for temporary mounting to permanently  just go to fstab
+
+vi /etc/fstab
+
+Step 12: inside fstab write the path of drive and other things and every typed command press tab for example below mentioned the command demo
+
+/dev/xvdf	/home/ec2-user/aws	ext4	defaults	0 0 
+#######################################################################################################################################################################
+Note:
+
+/dev/xvdf ---> this is the drive location 
+
+/home/ec2-user/aws ----> this is a location where drive partion is mounted 
+
+ext4---> this is the file system format
+
+defaults---> it is use to set every thing is defaults 
+
+#######################################################################################################################################################################
+
+Another command to mount the drive on linux 
+Step 1: run Below command:
+
+sudo mkfs -t ext4 /dev/xvdf
+
+Step 2:
+
+mkdir aws
+sudo mount /dev/xvdf aws
+nano /etc/fstab
+ 
+Note : inside fstab file put the configuration for permanent mounting of EBS volume like:
+
+/dev/xvdf	     /home/ec2-user/aws	                    ext4	    defaults	0 0	
+    ^                      ^
+    ^                      ^                                  ^
+drive location     (it can be changed user to user)      File System
+
+
+
