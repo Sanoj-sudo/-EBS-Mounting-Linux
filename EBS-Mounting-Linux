@@ -1,7 +1,7 @@
 step 1:  check your disk is mounted or not 
 #lsblk
 
-Note: if it is mounted it will show you like --->>>    xvdf1 202:81   0  15G  0 part /aws
+Note: in my case->>>if it is mounted it will show you like this  --->>>    xvdf1 202:81   0  15G  0 part /aws          
 
 Step 2: after that type command :
 #fdisk /dev/xvdf
